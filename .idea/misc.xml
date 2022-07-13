@@ -3,9 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Projects/PassMyPizza/app/src/main/res/drawable/button_bg.xml" value="0.294" />
+        <entry key="..\:/Projects/PassMyPizza/app/src/main/res/drawable/round_bg_active.xml" value="0.274" />
+        <entry key="..\:/Projects/PassMyPizza/app/src/main/res/drawable/round_btn.xml" value="0.273" />
         <entry key="..\:/Projects/PassMyPizza/app/src/main/res/drawable/round_et_bg.xml" value="0.294" />
         <entry key="..\:/Projects/PassMyPizza/app/src/main/res/layout/activity_home.xml" value="0.32083333333333336" />
         <entry key="..\:/Projects/PassMyPizza/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Projects/PassMyPizza/app/src/main/res/layout/activity_pizza_build_page.xml" value="0.26927083333333335" />
         <entry key="..\:/Projects/PassMyPizza/app/src/main/res/layout/pizza_block_item.xml" value="0.358695652173913" />
       </map>
     </option>
