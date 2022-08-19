@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PassMyPizza">
         <activity
+            android:name=".Activities.ConfirmOrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.PizzaBuildPage"
             android:exported="false" />
         <activity
