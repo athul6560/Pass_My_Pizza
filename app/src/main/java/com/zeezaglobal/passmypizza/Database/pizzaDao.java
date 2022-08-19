@@ -21,7 +21,10 @@ public interface pizzaDao {
     Pizza findByName(String first);
 
     @Insert
-    void insertAll(Pizza... users);
+    void insertAll(Pizza... pizzas);
+
+    @Insert
+    void insert(Pizza pizza);
 
     @Delete
     void delete(Pizza user);

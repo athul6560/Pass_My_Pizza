@@ -25,7 +25,7 @@ public class PizzaBuildPage extends AppCompatActivity {
     private CheckBox tomato, pesto, chiekn, olive, onions;
     private Pizza pizza;
     private String size = "Large", crust = "Thick";
-    private StringBuilder topings;
+    private StringBuilder topings= new StringBuilder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

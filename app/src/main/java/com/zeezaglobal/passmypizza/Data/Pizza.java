@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName="pizza")
 public class Pizza {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int  id;
     private String  pizzaName;
     private String  topings;
@@ -20,6 +20,14 @@ public class Pizza {
         this.size = size;
         this.crust = crust;
         this.price = price;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getPizzaName() {

@@ -14,7 +14,9 @@ import android.view.View;
 
 import com.zeezaglobal.passmypizza.Adapters.PizzaBlockAdapter;
 import com.zeezaglobal.passmypizza.Data.Pizza;
+import com.zeezaglobal.passmypizza.Database.AppDatabase;
 import com.zeezaglobal.passmypizza.R;
+import com.zeezaglobal.passmypizza.Utils.Constants;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements PizzaBlockAdapter.ItemClickListener {
     private PizzaBlockAdapter adapter;
-    private List<Pizza> pizzaList = new ArrayList<>();
+
 
 
 
@@ -44,10 +46,12 @@ public class HomeActivity extends AppCompatActivity implements PizzaBlockAdapter
 
     private void initComponents() {
         // set up the RecyclerView
+        AppDatabase appDatabase=AppDatabase.getDatabase(HomeActivity.this);
+
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new PizzaBlockAdapter(this, pizzaList);
+        adapter = new PizzaBlockAdapter(this, appDatabase.pizzaDao().getAll());
         adapter.setClickListener(this);
         recyclerView.setAdapter(adapter);
     }
