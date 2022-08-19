@@ -1,37 +1,44 @@
 package com.zeezaglobal.passmypizza.Data;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName="pizza")
 public class Pizza {
-    private String  id;
+    @PrimaryKey
+    private int  id;
     private String  pizzaName;
-
-    private String  image_base64;
+    private String  topings;
+    private String  size;
+    private String  crust;
     private double  price;
-    private int  rating;
 
-    public Pizza(String pizzaName, String image_base64, double price, int rating) {
+    public Pizza( String pizzaName, String topings, String size, String crust, double price) {
+
         this.pizzaName = pizzaName;
-        this.image_base64 = image_base64;
+        this.topings = topings;
+        this.size = size;
+        this.crust = crust;
         this.price = price;
-        this.rating = rating;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getPizzaName() {
         return pizzaName;
     }
 
-    public String getImage_base64() {
-        return image_base64;
+    public String getTopings() {
+        return topings;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public String getCrust() {
+        return crust;
     }
 
     public double getPrice() {
         return price;
-    }
-
-    public int getRating() {
-        return rating;
     }
 }

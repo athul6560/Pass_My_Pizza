@@ -13,15 +13,19 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.zeezaglobal.passmypizza.Data.Pizza;
 import com.zeezaglobal.passmypizza.R;
+import com.zeezaglobal.passmypizza.Utils.Constants;
 
 public class PizzaBuildPage extends AppCompatActivity {
-   private Button small, medium, large;
-   private Button thinBtn, thickBtn;
+    private Button small, medium, large;
+    private Button thinBtn, thickBtn;
     private ImageView thinCrust, thickCrust;
-    private ImageView tomatoImg, oliveImg,pestoImg,chieknImg,onionImg;
-    private CheckBox tomato,pesto,chiekn,olive,onions;
-
+    private ImageView tomatoImg, oliveImg, pestoImg, chieknImg, onionImg;
+    private CheckBox tomato, pesto, chiekn, olive, onions;
+    private Pizza pizza;
+    private String size = "Large", crust = "Thick";
+    private StringBuilder topings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,50 +44,60 @@ public class PizzaBuildPage extends AppCompatActivity {
         tomato.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b)
-               tomatoImg.setVisibility(View.VISIBLE);
-                else
+                if (b) {
+                    tomatoImg.setVisibility(View.VISIBLE);
+                    topings.append("Tomato Sauce, ");
+                } else {
                     tomatoImg.setVisibility(View.GONE);
+                }
 
             }
         });
         pesto.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b)
+                if (b) {
                     pestoImg.setVisibility(View.VISIBLE);
-                else
+                    topings.append("Pesto Sauce, ");
+                } else {
                     pestoImg.setVisibility(View.GONE);
+                }
 
             }
         });
         olive.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b)
+                if (b) {
                     oliveImg.setVisibility(View.VISIBLE);
-                else
+                    topings.append("Olives, ");
+                } else {
                     oliveImg.setVisibility(View.GONE);
+                }
 
             }
         });
         chiekn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b)
+                if (b) {
                     chieknImg.setVisibility(View.VISIBLE);
-                else
+                    topings.append("Chicken, ");
+                } else {
                     chieknImg.setVisibility(View.GONE);
+                }
 
             }
         });
         onions.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b)
+                if (b) {
                     onionImg.setVisibility(View.VISIBLE);
-                else
+                    topings.append("Onions, ");
+                } else {
                     onionImg.setVisibility(View.GONE);
+                }
 
             }
         });
@@ -93,7 +107,11 @@ public class PizzaBuildPage extends AppCompatActivity {
         findViewById(R.id.next_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-startActivity(new Intent(PizzaBuildPage.this,ConfirmOrderActivity.class));
+                pizza=new Pizza(crust+" Crust "+size+" Pizza with "+topings,topings.toString(),size,crust,15.67);
+
+
+                Constants.ACTIVE_PIZZA = pizza;
+                startActivity(new Intent(PizzaBuildPage.this, ConfirmOrderActivity.class));
             }
         });
 
@@ -101,6 +119,7 @@ startActivity(new Intent(PizzaBuildPage.this,ConfirmOrderActivity.class));
         thinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                crust = "Thin";
                 thinCrust.setVisibility(View.VISIBLE);
                 thickCrust.setVisibility(View.INVISIBLE);
                 thinBtn.setBackgroundResource(R.drawable.round_bg_active);
@@ -110,6 +129,7 @@ startActivity(new Intent(PizzaBuildPage.this,ConfirmOrderActivity.class));
         thickBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                crust = "Thick";
                 thickCrust.setVisibility(View.VISIBLE);
                 thinCrust.setVisibility(View.INVISIBLE);
                 thickBtn.setBackgroundResource(R.drawable.round_bg_active);
@@ -119,6 +139,7 @@ startActivity(new Intent(PizzaBuildPage.this,ConfirmOrderActivity.class));
         small.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                size = "Small";
                 small.setBackgroundResource(R.drawable.round_bg_active);
                 medium.setBackgroundResource(R.drawable.round_btn);
                 large.setBackgroundResource(R.drawable.round_btn);
@@ -130,6 +151,7 @@ startActivity(new Intent(PizzaBuildPage.this,ConfirmOrderActivity.class));
         medium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                size = "Medium";
                 medium.setBackgroundResource(R.drawable.round_bg_active);
                 small.setBackgroundResource(R.drawable.round_btn);
                 large.setBackgroundResource(R.drawable.round_btn);
@@ -141,6 +163,7 @@ startActivity(new Intent(PizzaBuildPage.this,ConfirmOrderActivity.class));
         large.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                size = "Large";
                 large.setBackgroundResource(R.drawable.round_bg_active);
                 medium.setBackgroundResource(R.drawable.round_btn);
                 small.setBackgroundResource(R.drawable.round_btn);
@@ -161,13 +184,11 @@ startActivity(new Intent(PizzaBuildPage.this,ConfirmOrderActivity.class));
         thickCrust = findViewById(R.id.thick_img);
 
 
-
         tomato = findViewById(R.id.tomato_sause_ch);
         pesto = findViewById(R.id.pesto_ch);
         chiekn = findViewById(R.id.chiekn_ch);
         olive = findViewById(R.id.olive_ch);
         onions = findViewById(R.id.onion_ch);
-
 
 
         tomatoImg = findViewById(R.id.ketchup);
