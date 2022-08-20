@@ -2,7 +2,7 @@ package com.zeezaglobal.passmypizza.Data;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
+//model class
 @Entity(tableName="pizza")
 public class Pizza {
     @PrimaryKey(autoGenerate = true)

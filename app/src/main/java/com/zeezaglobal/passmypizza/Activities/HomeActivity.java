@@ -30,6 +30,7 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity implements PizzaBlockAdapter.ItemClickListener {
     private PizzaBlockAdapter adapter;
     private EditText searchEt;
+    // data for the recyclerview
     private List<Pizza> listData;
    private RecyclerView recyclerView;
    private AppDatabase appDatabase;
@@ -41,7 +42,7 @@ public class HomeActivity extends AppCompatActivity implements PizzaBlockAdapter
 
 
         onClicks();
-
+// listen the words of the edittext for search function
         searchEt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -50,6 +51,7 @@ public class HomeActivity extends AppCompatActivity implements PizzaBlockAdapter
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                //filter the list using search keyword
                 List<Pizza> newList = new ArrayList<>();
                 for (int j = 0; j < listData.size(); j++) {
                     if (listData.get(j).getPizzaName().toLowerCase().contains(charSequence.toString().toLowerCase())) {
@@ -89,6 +91,7 @@ public class HomeActivity extends AppCompatActivity implements PizzaBlockAdapter
 
         adapter = new PizzaBlockAdapter(this, listData);
         adapter.setClickListener(this);
+        //used for swipe to delete function
         new ItemTouchHelper(itemTouch).attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(adapter);
     }
@@ -96,7 +99,7 @@ public class HomeActivity extends AppCompatActivity implements PizzaBlockAdapter
     @Override
     public void onItemClick(View view, int position) {
     }
-
+// swipe to delete callback function
     ItemTouchHelper.SimpleCallback itemTouch=new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
