@@ -107,11 +107,14 @@ public class PizzaBuildPage extends AppCompatActivity {
         findViewById(R.id.next_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(validation()){
                 pizza=new Pizza(crust+" Crust "+size+" Pizza with "+topings,topings.toString(),size,crust,15.67);
 
 
                 Constants.ACTIVE_PIZZA = pizza;
-                startActivity(new Intent(PizzaBuildPage.this, ConfirmOrderActivity.class));
+                startActivity(new Intent(PizzaBuildPage.this, ConfirmOrderActivity.class));}else{
+                    Toast.makeText(PizzaBuildPage.this, "Please select atleast one toping", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -172,6 +175,15 @@ public class PizzaBuildPage extends AppCompatActivity {
                 large.setTextColor(ContextCompat.getColor(PizzaBuildPage.this, R.color.white));
             }
         });
+    }
+
+    private boolean validation() {
+
+      if(tomato.isChecked() || pesto.isChecked() || chiekn.isChecked()|| olive.isChecked()|| onions.isChecked()){
+          return true;
+      }else{
+          return false;
+      }
     }
 
     private void initComponents() {

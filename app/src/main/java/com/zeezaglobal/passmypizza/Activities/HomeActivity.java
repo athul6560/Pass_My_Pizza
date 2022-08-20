@@ -1,6 +1,8 @@
 package com.zeezaglobal.passmypizza.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +32,7 @@ public class HomeActivity extends AppCompatActivity implements PizzaBlockAdapter
     private EditText searchEt;
     private List<Pizza> listData;
    private RecyclerView recyclerView;
-
+   private AppDatabase appDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +76,7 @@ public class HomeActivity extends AppCompatActivity implements PizzaBlockAdapter
     private void initComponents() {
         searchEt = findViewById(R.id.search_edittext);
         // set up the RecyclerView
-        AppDatabase appDatabase = AppDatabase.getDatabase(HomeActivity.this);
+        appDatabase = AppDatabase.getDatabase(HomeActivity.this);
 
          recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -84,12 +86,29 @@ public class HomeActivity extends AppCompatActivity implements PizzaBlockAdapter
     }
 
     private void setAdapterRV(List<Pizza> listData) {
+
         adapter = new PizzaBlockAdapter(this, listData);
         adapter.setClickListener(this);
+        new ItemTouchHelper(itemTouch).attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void onItemClick(View view, int position) {
     }
+
+    ItemTouchHelper.SimpleCallback itemTouch=new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+            appDatabase.pizzaDao().delete(listData.get(viewHolder.getAdapterPosition()));
+            listData.remove(viewHolder.getAdapterPosition());
+            adapter.notifyDataSetChanged();
+        }
+    };
 }

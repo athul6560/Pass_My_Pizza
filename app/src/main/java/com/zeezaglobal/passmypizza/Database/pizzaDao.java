@@ -14,8 +14,8 @@ public interface pizzaDao {
     @Query("SELECT * FROM pizza")
     List<Pizza> getAll();
 
-    @Query("SELECT * FROM pizza WHERE id IN (:userIds)")
-    List<Pizza> loadAllByIds(int[] userIds);
+    @Query("SELECT * FROM pizza WHERE id IN (:pizzaId)")
+    List<Pizza> loadAllByIds(int[] pizzaId);
 
     @Query("SELECT * FROM pizza WHERE pizzaName LIKE :first  LIMIT 1")
     Pizza findByName(String first);
@@ -27,5 +27,5 @@ public interface pizzaDao {
     void insert(Pizza pizza);
 
     @Delete
-    void delete(Pizza user);
+    void delete(Pizza pizza);
 }
